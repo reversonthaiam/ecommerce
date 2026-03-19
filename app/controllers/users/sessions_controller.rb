@@ -1,0 +1,22 @@
+class Users::SessionsController < Devise::SessionsController
+  respond_to :json
+
+  skip_before_action :require_no_authentication, only: :create
+
+  def create
+    self.resource = warden.authenticate!(auth_options)
+    sign_in(resource_name, resource)
+    render json: {
+      message: "Login realizado com sucesso",
+      user: {
+        id: resource.id,
+        email: resource.email
+      }
+    }, status: :ok
+  end
+
+  def destroy
+    signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
+    render json: { message: "Logout realizado com sucesso" }, status: :ok
+  end
+end
