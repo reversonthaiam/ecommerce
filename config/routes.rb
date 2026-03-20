@@ -4,7 +4,9 @@ Rails.application.routes.draw do
     registrations: "users/registrations"
   }
 
-  resources :products, only: [ :index, :show, :update, :destroy ]
+  resources :products, only: [ :index, :create, :show, :update, :destroy ]
+
+  resources :orders, only: [ :index, :show, :create ]
 
   get "up" => "rails/health#show", as: :rails_health_check
 end
