@@ -16,6 +16,8 @@ class OrderService
     total = order.order_items.sum { |i| i.quantity * i.unit_price }
     order.update(total: total)
 
+    OrderConfirmationJob.perform_later(order.id)
+
     { success: true, order: order }
   end
 end

@@ -3,6 +3,18 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    user_name: "cda0c82868b741",
+    password: "****4a4a",
+    address: "sandbox.smtp.mailtrap.io",
+    host: "sandbox.smtp.mailtrap.io",
+    port: "2525",
+    authentication: :login
+  }
+
+  config.active_job.queue_adapter = :sidekiq
+
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
 
   # Make code changes take effect immediately without server restart.
