@@ -13,6 +13,8 @@ Rails.application.configure do
     authentication: :login
   }
 
+  config.cache_store = :redis_cache_store, { url: ENV.fetch("REDIS_URL", "redis://localhost:6379/0") }
+
   config.active_job.queue_adapter = :sidekiq
 
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }

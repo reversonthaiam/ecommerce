@@ -16,6 +16,10 @@ class OrderService
     total = order.order_items.sum { |i| i.quantity * i.unit_price }
     order.update(total: total)
 
+    Rails.cache.delete("dashboard:total_sales_today")
+    Rails.cache.delete("dashboard:best_selling_products")
+    Rails.cache.delete("dashboard:revenue_by_category")
+
     OrderConfirmationJob.perform_later(order.id)
 
     { success: true, order: order }
