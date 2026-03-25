@@ -1,4 +1,6 @@
 class DashboardController < ApplicationController
+  include AdminAuthenticable
+
   def index
     total_sales_today = Rails.cache.fetch("dashboard:total_sales_today", expires_in: 2.minutes) do
       Order.where("created_at >= ?", Date.today).sum(:total)
