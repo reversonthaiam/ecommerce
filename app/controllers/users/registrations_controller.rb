@@ -9,7 +9,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
         message: "Cadastro realizado com sucesso",
         user: {
           id: resource.id,
-          email: resource.email
+          email: resource.email,
+          role: resource.role
         }
       }, status: :created
     else

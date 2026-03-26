@@ -5,6 +5,8 @@ class User < ApplicationRecord
 
   validates :role, inclusion: { in: %w[admin user] }
 
+  has_many :orders
+
   def admin?
     role == "admin"
   end
