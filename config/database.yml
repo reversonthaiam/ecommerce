@@ -1,21 +1,22 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: localhost
-  username: dev
-  password: dev
-  max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
-  database: webscraping_manager_development
+  database: ecommerce_development
+  host: localhost
+  username: dev
+  password: dev
 
 test:
   <<: *default
-  database: webscraping_manager_test
+  database: ecommerce_test
+  host: localhost
+  username: dev
+  password: dev
 
 production:
   <<: *default
-  database: webscraping_manager_production
-  username: <%= ENV["DB_USERNAME"] %>
-  password: <%= ENV["DB_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>
